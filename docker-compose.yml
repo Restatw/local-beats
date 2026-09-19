@@ -3,6 +3,9 @@ services:
   web:
     build: { context: ., target: prod }
     ports: ["8080:80"]
+    volumes:
+      # 填入 Client ID 後不必重新建置(見 README「雲端匯入設定」)
+      - ./public/cloud-config.json:/usr/share/nginx/html/cloud-config.json:ro
 
   # 開發模式(熱重載) → http://localhost:4200
   #   docker compose --profile dev up dev

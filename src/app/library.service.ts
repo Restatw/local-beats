@@ -3,7 +3,7 @@ import { ImportResult, Playlist, Track } from './models';
 import { StorageService } from './storage.service';
 import { newId, parseFileName } from './util';
 
-const AUDIO_EXT = /\.(mp3|m4a|aac|wav|ogg|oga|opus|flac|weba)$/i;
+export const AUDIO_EXT = /\.(mp3|m4a|aac|wav|ogg|oga|opus|flac|weba)$/i;
 
 /** 讀取音檔長度;檔案無法解碼回傳 null */
 function readDuration(file: Blob): Promise<number | null> {
@@ -41,6 +41,12 @@ export class LibraryService {
     effect(() => this.storage.save('lb.tracks', this.tracks()));
     effect(() => this.storage.save('lb.playlists', this.playlists()));
     effect(() => this.storage.save('lb.liked', this.likedIds()));
+  }
+
+  /** 是否已匯入過同名同大小的檔案 */
+  isKnown(name: string, size: number): boolean {
+    const key = `${name}:${size}`;
+    return this.tracks().some((t) => t.fileKey === key);
   }
 
   resolve(ids: string[]): Track[] {

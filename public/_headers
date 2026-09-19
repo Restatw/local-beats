@@ -1,0 +1,29 @@
+# service worker 與其設定檔不能被快取,否則無法更新
+/ngsw-worker.js
+  Cache-Control: no-cache
+/ngsw.json
+  Cache-Control: no-cache
+/safety-worker.js
+  Cache-Control: no-cache
+/worker-basic.min.js
+  Cache-Control: no-cache
+/index.html
+  Cache-Control: no-cache
+/manifest.webmanifest
+  Cache-Control: no-cache
+/cloud-config.json
+  Cache-Control: no-cache
+/auth-callback.html
+  Cache-Control: no-cache
+
+# 帶雜湊的建置產物可長期快取(勿與上面的規則重疊,否則 Cache-Control 會被合併)
+/main-*
+  Cache-Control: public, max-age=31536000, immutable
+/chunk-*
+  Cache-Control: public, max-age=31536000, immutable
+/polyfills-*
+  Cache-Control: public, max-age=31536000, immutable
+/styles-*
+  Cache-Control: public, max-age=31536000, immutable
+/media/*
+  Cache-Control: public, max-age=31536000, immutable

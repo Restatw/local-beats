@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <title>登入中…</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>body{font:16px system-ui;background:#121212;color:#fff;display:grid;place-items:center;height:100vh;margin:0}</style>
+  </head>
+  <body>
+    <p>登入完成,可以關閉這個視窗。</p>
+    <script>
+      // 把授權結果(?code=…&state=…)交還給開啟這個視窗的 LocalBeats 頁面
+      if (window.opener) window.opener.postMessage({ type: 'lb-oauth', query: location.search }, location.origin);
+      window.close();
+    </script>
+  </body>
+</html>

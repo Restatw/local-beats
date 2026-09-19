@@ -297,3 +297,31 @@ select { width: auto; padding: 6px 10px; margin-left: 6px; }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
+
+/* ───── 雲端匯入 ───── */
+.upload-actions { display: flex; flex-direction: column; gap: 8px; .btn { width: 100%; } }
+.empty .upload-actions { flex-direction: row; flex-wrap: wrap; justify-content: center; .btn { width: auto; } }
+
+.modal.cloud { width: min(640px, 100%); max-height: min(86dvh, 680px); gap: 12px; }
+.cloud-head { display: flex; align-items: center; justify-content: space-between; }
+.tabs { display: flex; gap: 6px; border-bottom: 1px solid var(--line);
+  button { padding: 8px 14px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--muted); font-weight: 700;
+    &[aria-selected='true'] { color: var(--text); border-color: var(--accent); } }
+}
+.cloud-note { padding: 14px; border-radius: 8px; background: #333; color: var(--muted); code { color: var(--text); } }
+.cloud-error { color: var(--danger); font-size: 13px; }
+.crumbs { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; font-size: 13px; color: var(--muted);
+  button { padding: 2px 6px; border: 0; border-radius: 4px; background: transparent; color: var(--text); &:disabled { color: var(--muted); cursor: default; } &:not(:disabled):hover { background: var(--hover); } }
+  .link { color: var(--muted); text-decoration: underline; }
+}
+.cloud-list { flex: 1; min-height: 160px; overflow-y: auto; border-radius: 8px; background: #1f1f1f; padding: 4px; }
+.cloud-row { display: flex; align-items: center; gap: 10px; width: 100%; padding: 8px 10px; border: 0; border-radius: 6px; background: transparent; text-align: left; cursor: pointer;
+  &:hover { background: rgba(255, 255, 255, .08); }
+  .name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  input[type='checkbox'] { width: 18px; height: 18px; accent-color: var(--accent); }
+}
+.load-more { margin: 8px auto; display: flex; }
+.cloud-foot { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.progress-wrap { flex: 1; min-width: 0; }
+.progress-text { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--muted); margin-bottom: 4px; span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } }
+progress { width: 100%; height: 6px; accent-color: var(--accent); }

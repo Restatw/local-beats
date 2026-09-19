@@ -68,3 +68,9 @@ export async function filesFromDrop(dt: DataTransfer): Promise<File[]> {
   for (const e of entries) await walk(e!);
   return out;
 }
+
+export function formatSize(bytes: number): string {
+  if (!bytes) return '';
+  if (bytes < 1024 * 1024) return `${Math.max(1, Math.round(bytes / 1024))} KB`;
+  return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
+}

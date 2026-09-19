@@ -4,11 +4,12 @@ import { Icon } from './icon';
 import { LibraryService } from './library.service';
 import { Playlist } from './models';
 import { UiService } from './ui.service';
+import { CloudButton } from './cloud/cloud-button';
 import { UploadButton } from './upload-button';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterLink, RouterLinkActive, Icon, UploadButton],
+  imports: [RouterLink, RouterLinkActive, Icon, UploadButton, CloudButton],
   template: `
     <aside class="sidebar" [class.open]="ui.sidebarOpen()" aria-label="主選單">
       <div class="brand">
@@ -60,7 +61,10 @@ import { UploadButton } from './upload-button';
         </ul>
       </section>
 
-      <app-upload-button />
+      <div class="upload-actions">
+        <app-upload-button />
+        <app-cloud-button />
+      </div>
     </aside>
     <div class="scrim" [class.show]="ui.sidebarOpen()" (click)="close()"></div>
   `,

@@ -1,5 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { CloudDialog } from './cloud/cloud-dialog';
 import { Icon } from './icon';
 import { ImportService } from './import.service';
 import { Overlays } from './overlays';
@@ -10,7 +11,7 @@ import { filesFromDrop } from './util';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Sidebar, PlayerBar, Overlays, Icon],
+  imports: [RouterOutlet, Sidebar, PlayerBar, Overlays, CloudDialog, Icon],
   template: `
     <div
       class="app"
@@ -34,6 +35,7 @@ import { filesFromDrop } from './util';
         <div class="drop-overlay">放開以匯入音樂檔案或資料夾</div>
       }
     </div>
+    <app-cloud-dialog />
     <app-overlays />
   `,
 })

@@ -3,6 +3,7 @@ import { Icon } from '../icon';
 import { LibraryService } from '../library.service';
 import { PlayerService } from '../player.service';
 import { TrackList } from '../track-list';
+import { CloudButton } from '../cloud/cloud-button';
 import { UploadButton } from '../upload-button';
 import { formatTotal } from '../util';
 
@@ -10,7 +11,7 @@ type SortKey = 'recent' | 'title' | 'artist';
 
 @Component({
   selector: 'app-library-page',
-  imports: [TrackList, UploadButton, Icon],
+  imports: [TrackList, UploadButton, CloudButton, Icon],
   template: `
     <section class="page">
       <header class="page-head">
@@ -46,7 +47,10 @@ type SortKey = 'recent' | 'title' | 'artist';
           <app-icon name="music" [size]="56" />
           <h2>還沒有音樂</h2>
           <p class="muted">上傳 mp3、m4a、wav、flac 等檔案或整個資料夾,或直接拖曳到視窗裡。<br />檔名為「演出者 - 歌名」時會自動辨識。</p>
-          <app-upload-button />
+          <div class="upload-actions">
+            <app-upload-button />
+            <app-cloud-button />
+          </div>
         </div>
       }
     </section>
