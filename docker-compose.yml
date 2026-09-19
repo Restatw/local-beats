@@ -1,0 +1,31 @@
+services:
+  # 正式版(nginx + service worker) → http://localhost:8080
+  web:
+    build: { context: ., target: prod }
+    ports: ["8080:80"]
+
+  # 開發模式(熱重載) → http://localhost:4200
+  #   docker compose --profile dev up dev
+  dev:
+    profiles: [dev]
+    build: { context: ., target: dev }
+    ports: ["4200:4200"]
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+
+  # 端對端測試(Playwright / Chromium)
+  #   docker compose --profile test run --rm e2e
+  e2e:
+    profiles: [test]
+    build: { context: ./e2e }
+    # 與 web 共用網路,才能用 localhost(瀏覽器視為安全來源,service worker 才能運作)
+    network_mode: "service:web"
+    depends_on:
+      web: { condition: service_healthy }
+    environment:
+      BASE_URL: http://localhost
+    volumes:
+      - ./e2e/tests:/e2e/tests
+      - ./e2e/playwright.config.ts:/e2e/playwright.config.ts
+      - ./e2e/out:/e2e/out
